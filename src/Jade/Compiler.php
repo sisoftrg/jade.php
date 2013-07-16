@@ -296,7 +296,7 @@ class Compiler {
                 // translate the javascript's obj.attr into php's obj->attr or obj['attr']
                 case '.':
                     // TODO: Move isset(->)?->:[]; to a function
-                    $accessor= "{$v}=isset({$varname}->{$name}) ? {$varname}->{$name} : {$varname}['{$name}']";
+                    $accessor= "{$v}=isset({$varname}->{$name}) ? {$varname}->{$name} : ((!is_object({$varname}))?({$varname}['{$name}']):'')";
                     array_push($result, $accessor);
                     $varname = $v;
 
